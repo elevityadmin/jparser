@@ -1,0 +1,185 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 14% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 14% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 14% 12%;
+
+    --primary: 38 92% 54%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 8% 82%;
+    --input: 220 8% 82%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* JSON editor colors */
+    --json-string: 340 80% 65%;
+    --json-number: 210 90% 60%;
+    --json-boolean: 35 90% 55%;
+    --json-null: 320 70% 60%;
+    --json-key: 245 70% 62%;
+    --json-background: 220 20% 97.5%;
+  }
+
+  .night, .dark {
+    --background: 240 10% 10%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 220 70% 60%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 5% 22%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 5% 22%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 5% 22%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5% 28%;
+    --input: 240 5% 28%;
+    --ring: 240 4.9% 83.9%;
+
+    /* JSON editor colors in dark mode */
+    --json-string: 340 80% 65%;
+    --json-number: 210 90% 60%;
+    --json-boolean: 35 90% 55%;
+    --json-null: 320 70% 60%;
+    --json-key: 220 70% 60%;
+    --json-background: 240 10% 14%;
+  }
+
+  .dusk {
+    --background: 262 28% 12%; --foreground: 35 40% 96%; --card: 266 25% 16%; --card-foreground: 35 40% 96%; --primary: 32 85% 62%; --primary-foreground: 260 30% 12%; --secondary: 268 20% 25%; --secondary-foreground: 35 40% 96%; --muted: 268 20% 25%; --muted-foreground: 30 18% 72%; --accent: 268 20% 25%; --accent-foreground: 35 40% 96%; --border: 268 18% 30%; --input: 268 18% 30%; --json-background: 266 25% 18%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased min-h-screen;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    background-image: linear-gradient(to right, hsl(var(--border) / .22) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border) / .22) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  * {
+    @apply border-border transition-colors;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+}
+
+@layer components {
+  .tool { @apply inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2.5 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-40; }
+  .tool.primary { @apply border-primary bg-primary text-primary-foreground hover:opacity-90; }
+  .gutter { @apply select-none border-r border-border bg-card px-3 py-4 text-right font-mono text-[13px] leading-6 text-muted-foreground/50 tabular-nums; }
+  .editor { @apply min-h-full flex-1 resize-none bg-transparent py-4 pl-4 pr-6 font-mono text-[13px] leading-6 text-foreground outline-none placeholder:text-muted-foreground/40; }
+  .tree-row { @apply rounded px-1 hover:bg-accent/40; }
+  .glass-panel {
+    @apply backdrop-blur-md bg-card/95 shadow-lg border border-border rounded-lg transition-all duration-300;
+  }
+  
+  .json-editor {
+    @apply font-mono text-sm rounded-lg bg-json-background/50 backdrop-blur-sm p-4 h-full overflow-auto;
+    tab-size: 2;
+  }
+  
+  .json-viewer {
+    @apply font-mono text-sm rounded-lg bg-json-background/90 backdrop-blur-sm p-4 h-full overflow-auto transition-all duration-300;
+  }
+  
+  .json-viewer-container {
+    @apply font-mono text-sm rounded-lg bg-json-background/90 backdrop-blur-sm p-4 h-full overflow-auto transition-all duration-300;
+  }
+  
+  .line-numbers {
+    @apply font-mono text-sm py-0 pl-2 select-none min-w-[2rem] text-xs;
+    counter-reset: line;
+  }
+  
+  .line-number {
+    @apply h-[1.25rem] leading-5 text-right pr-2;
+  }
+  
+  .action-button {
+    @apply rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300
+           bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-md 
+           active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .action-icon-button {
+    @apply rounded-lg p-2 text-sm font-medium transition-all duration-300
+           bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-md 
+           active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .subtle-button {
+    @apply rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300
+           bg-secondary text-secondary-foreground hover:bg-secondary/80
+           active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+}
+
+@layer utilities {
+  .text-json-string {
+    color: hsl(var(--json-string));
+  }
+  
+  .text-json-number {
+    color: hsl(var(--json-number));
+  }
+  
+  .text-json-boolean {
+    color: hsl(var(--json-boolean));
+  }
+  
+  .text-json-null {
+    color: hsl(var(--json-null));
+  }
+  
+  .text-json-key {
+    color: hsl(var(--json-key));
+  }
+}
