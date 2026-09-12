@@ -34,3 +34,23 @@ Issues, accessibility improvements, new format adapters, documentation, and thou
 ## License
 
 MIT License. Copyright © 2026 Elevity Holdings LLC. Principal Architect: Michael Bahlitzanakis. See [LICENSE](LICENSE).
+
+## Screenshots
+
+![JParser workspace](docs/screenshots/workspace.svg)
+
+![Day, dusk, and night themes](docs/screenshots/themes.svg)
+
+## Hosting
+
+JParser is a static frontend and can be hosted on GitHub Pages, Netlify, Vercel, Cloudflare Pages, or any ordinary web server. Build it with `npm run build` and publish the generated `dist/` directory. For a self-contained server deployment, build the frontend and run the included Go server from `serve/cmd`:
+
+```sh
+cd repo
+npm install
+npm run build
+cd ../serve
+ go run ./cmd
+```
+
+The Go server serves the built assets on port `8087`. No database, runtime API, or environment variables are required.
